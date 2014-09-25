@@ -27,5 +27,5 @@ module.exports = function(app, db, passport) {
         res.redirect('/');
     });
 
-    app.get('*', isAuthed, staticPagesController.index);
+    app.get('*', staticPagesController.index);
 };

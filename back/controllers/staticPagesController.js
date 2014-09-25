@@ -5,7 +5,6 @@ module.exports = {
                 res.send(500);
             }
 
-            res.setHeader("Set-Cookie", ["id=" + req.user._id]);
             res.set('Content-Type', 'text/html');
             res.send(200, new Buffer(html));
         });

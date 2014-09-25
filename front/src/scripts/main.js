@@ -29,7 +29,7 @@ require.config({
             exports: 'Handlebars'
         }
     },
-    baseUrl: 'src/scripts/',
+    baseUrl: '/scripts/',
     name: "main",
     out: "dist/main.js",
     removeCombined: true
