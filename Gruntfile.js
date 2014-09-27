@@ -190,6 +190,20 @@ module.exports = function(grunt) {
                     include: ['vendor/require.js']
                 }
             }
+        },
+
+        mochacli: {
+            options: {
+                require: [
+                    'should',
+                    'sinon',
+                    'nock',
+                    'supertest'
+                ]
+            },
+            'all': ['back/test/**/*.js', 'front/src/test/**/*.js'],
+            'front': ['front/src/test/**/*.js'],
+            'back': ['back/test/**/*.js']
         }
     });
 
@@ -201,7 +215,8 @@ module.exports = function(grunt) {
         'contrib-copy',
         'contrib-jasmine',
         'contrib-concat',
-        'contrib-requirejs'
+        'contrib-requirejs',
+        'mocha-cli'
     ], function(task) {
         grunt.loadNpmTasks('grunt-' + task);
     });
@@ -214,6 +229,11 @@ module.exports = function(grunt) {
     grunt.registerTask('release', [
         'requirejs',
         'copy:release'
+    ]);
+
+    grunt.registerTask('test', [
+        'mochacli:back',
+        'mochacli:front'
     ]);
 };
 
