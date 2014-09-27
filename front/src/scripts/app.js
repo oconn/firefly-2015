@@ -5,8 +5,15 @@ define([
     'marionette',
     'state',
     'fastclick',
+    
+    // Routers
+    'routers/appRouter',
 
-    'routers/appRouter'
+    // Views
+    'views/appLayoutView',
+
+    // Collections
+    'collections/posts'
 ], function(
     $,
     _,
@@ -15,7 +22,14 @@ define([
     state,
     FastClick,
 
-    Router
+    // Routers
+    Router,
+
+    // Views
+    AppLayoutView,
+
+    // Collections
+    PostsCollection
 ) {
     "use strict";
     
@@ -28,7 +42,7 @@ define([
             }.bind(this));
 
             this.on("start", function(options){
-                // this.startApp(options);
+                this.startApp(options);
             }.bind(this));
 
             this.addRegions({
@@ -43,11 +57,27 @@ define([
             // this.listenTo(state.vent, 'show:app', this.showApp);
             // this.listenTo(state.vent, 'show:modal', this.showModal);
             this.router = new Router();
-            // this.initializeState();
+            this.initializeState();
 
             if (Backbone.history) {
                 Backbone.history.start({pushState: true, root: '/'});
             }
+        },
+
+        startApp: function() {
+            this.wrapper.show(new AppLayoutView());
+        },
+
+        initializeState: function() {
+            state.posts = new PostsCollection();
+            state.posts.fetch(); 
+
+            // TODO Create User Model/Collection
+            state.user = {
+                firstName: 'Matt',
+                lastName: 'O\'Connell',
+                admin: true
+            };
         }
     });
 
