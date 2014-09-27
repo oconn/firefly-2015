@@ -72,6 +72,7 @@ module.exports = function(grunt) {
                     "Buffer": false,
                     "process": false,
                     "__dirname": false,
+                    "__base": false,
                     'static': false,
                     // requirejs
                     "define": false,

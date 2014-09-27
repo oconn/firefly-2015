@@ -21,11 +21,6 @@ module.exports = function(app, db, passport) {
     // ********* STATIC PAGES *********** //
 
     // ************* AUTH *************** //
-    app.get('/login', staticPagesController.login);
-    app.get('/logout', function(req, res) {
-        req.logout();
-        res.redirect('/');
-    });
 
     app.get('*', staticPagesController.index);
 };

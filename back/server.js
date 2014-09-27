@@ -18,16 +18,22 @@ var express = require('express'),
     routes = require('./routes'),
     env = process.env.NODE_ENV || 'development';
 
+// Set base path for app globally
+global.__base = path.join(__dirname, '..');
+
+// Determin where static assets are served from
 var app = express(),
-    staticPath = env === 'production' ? 'front/public' : 'front/src';
+    staticPath = env === 'production' ? 
+        __base + '/front/public/' : 
+        __base + '/front/src';
 
 // Set up the view engine
-app.set('views', path.join(__dirname, 'back', 'views'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // Middleware
 // app.use(cors());
-app.use('/', express['static'](path.join(__dirname, staticPath)));
+app.use('/', express['static'](staticPath));
 // app.use(favicon(__dirname, + '/frontend/favicon.ico'));
 app.use(logger('dev'));
 app.use(cookieParser());
