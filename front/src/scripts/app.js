@@ -4,6 +4,7 @@ define([
     'backbone',
     'marionette',
     'state',
+    'fastclick',
 
     'routers/appRouter'
 ], function(
@@ -12,6 +13,7 @@ define([
     Backbone,
     Marionette,
     state,
+    FastClick,
 
     Router
 ) {
@@ -20,6 +22,7 @@ define([
     var App = Backbone.Marionette.Application.extend({
 
         initialize: function() {
+            FastClick.attach(document.body);
             this.on("before:start", function(options){
                 this.bootstrap(options);
             }.bind(this));

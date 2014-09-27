@@ -9,20 +9,20 @@ options.banner = '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
 
 options.buildFiles = [
     {
-        src: 'packages/modernizr/modernizr.js',
-        dest: 'front/src/scripts/vendor/modernizr.js'
-    },
-    {
-        src: 'packages/requirejs/require.js',
-        dest: 'front/src/scripts/vendor/require.js'
-    },
-    {
         src: 'packages/jquery/dist/jquery.js',
         dest: 'front/src/scripts/vendor/jquery.js'
     },
     {
+        src: 'packages/lodash/dist/lodash.js',
+        dest: 'front/src/scripts/vendor/lodash.js'
+    },
+    {
         src: 'packages/underscore/underscore.js',
         dest: 'front/src/scripts/vendor/underscore.js'
+    },
+    {
+        src: 'packages/requirejs/require.js',
+        dest: 'front/src/scripts/vendor/require.js'
     },
     {
         src: 'packages/backbone/backbone.js',
@@ -53,16 +53,8 @@ options.buildFiles = [
         dest: 'front/src/scripts/vendor/chosen.jquery.js'
     },
     {
-        src: 'packages/lodash/dist/lodash.js',
-        dest: 'front/src/scripts/vendor/lodash.js'
-    },
-    {
-        src: 'packages/modernizr/modernizr.js',
-        dest: 'front/public/scripts/modernizr.js'
-    },  
-    {
-        src: 'front/src/scripts/login.js',
-        dest: 'front/public/scripts/login.js'
+        src: 'packages/fastclick/lib/fastclick.js',
+        dest: 'front/src/scripts/vendor/fastclick.js'
     }
 ];
 

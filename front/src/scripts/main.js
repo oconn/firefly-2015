@@ -2,19 +2,24 @@ require.config({
     paths:  {
         'jquery': 'vendor/jquery',
         'underscore': 'vendor/underscore',
+        'lodash': 'vendor/lodash',
         'backbone': 'vendor/backbone',
         'marionette': 'vendor/backbone.marionette',
         'backbone.wreqr': 'vendor/backbone.wreqr',
         'backbone.babysitter': 'vendor/backbone.babysitter',
         'handlebars': 'vendor/handlebars',
         'marionette.formview': 'vendor/marionette.formview',
-        'chosen': 'vendor/chosen.jquery'
+        'chosen': 'vendor/chosen.jquery',
+        'fastclick': 'vendor/fastclick'
     },
     shim: {
         'jquery': {
             exports: '$'
         },
         'underscore': {
+            exports: '_'
+        },
+        'lodash': {
             exports: '_'
         },
         'backbone': {
@@ -27,6 +32,9 @@ require.config({
         },
         'handlebars': {
             exports: 'Handlebars'
+        },
+        'chosen': {
+            deps: ['jquery']
         }
     },
     baseUrl: '/scripts/',
