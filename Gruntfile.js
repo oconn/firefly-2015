@@ -1,5 +1,5 @@
 var path = require('path');
-var gruntConfig = require('./config/grunt_config');
+var gruntConfig = require('./back/config/grunt_config');
 
 module.exports = function(grunt) {
     

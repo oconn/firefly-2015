@@ -14,7 +14,7 @@ var express = require('express'),
     path = require('path'),
 
     // Custome Modules
-    database = require('./config/database'),
+    database = require('./back/config/database'),
     routes = require('./back/routes'),
     env = process.env.NODE_ENV || 'development';
 
@@ -44,7 +44,7 @@ var db = MongoClient.connect(database.url, function(err, db) {
         throw err;
     }
 
-    require('./config/passport')(passport, db.collection('users'));
+    require('./back/config/passport')(passport, db.collection('users'));
 
     app.use(passport.initialize());
     app.use(passport.session());
