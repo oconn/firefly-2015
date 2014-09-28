@@ -24,7 +24,8 @@
         "bcrypt-nodejs": "*",
         "passport-google-oauth": "~0.1.5",
         "passport-local": "~1.0.0",
-        "winston-logger": "git://github.com/oconn/winston-logger.git",
+        "marked": "~0.3.2",
+        "highlight.js": "~8.2.0",
 
         "grunt": "~0.4.5",
         "grunt-contrib-clean": "~0.5.0",

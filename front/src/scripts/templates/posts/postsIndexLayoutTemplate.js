@@ -6,7 +6,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<h1>Posts</h1>\n\n<div id=\"post-collection\"></div>\n\n";
+  return "<div id=\"post-collection\"></div>\n\n";
   })
 
 });

@@ -1,5 +1,6 @@
 var helpers = require('../helpers/post_helpers'),
-    Post = require('../models/post');
+    Post = require('../models/post'),
+    ObjectID = require('mongodb').ObjectID;
 
 module.exports = function(db) {
     var c = {},
@@ -18,7 +19,7 @@ module.exports = function(db) {
     c.getPosts = function(req, res) {           
         postsCollection.find().toArray(function(err, posts) {
             if (err) {
-                res.json({'error': err});
+                res.status(400).json({error: err});
                 return;
             } 
 
@@ -28,9 +29,9 @@ module.exports = function(db) {
     };
     
     c.getPost = function(req, res) {
-        postsCollection.find({'_id': req.params.id}, function(err, post) {
+        postsCollection.find({'_id': new ObjectID(req.params.id)}, function(err, post) {
             if (err) {
-                res.json({'error': err});
+                res.status(400).json({error: err});
                 return;
             }
 
@@ -43,7 +44,7 @@ module.exports = function(db) {
         var post = new Post(req.body);
         postsCollection.insert(post, function(err, write) {
             if (err) {
-                res.json({'error': err});
+                res.status(400).json({error: err});
                 return;
             } 
 
@@ -53,11 +54,31 @@ module.exports = function(db) {
     };
     
     c.updatePost = function(req, res) {
-    
+        postsCollection.update(
+            {'_id': new ObjectID(req.params.id)},
+            new Post(req.body), 
+            function(err, post) {
+                if (err) {
+                    res.status(400).json({error: err});
+                    return;
+                }
+
+                res.json(post);
+                return;
+            }    
+        ); 
     };
     
     c.deletePost = function(req, res) {
-        postsColon    
+        postsCollection.remove({'_id': new ObjectID(req.params.id)}, function(err, result) {
+            if (err) {
+                res.status(400).json({error: err});
+                return;
+            }
+            
+            res.json({success: 'Post Removed'});
+            return;
+        });
     };
 
     return c;

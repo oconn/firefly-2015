@@ -14,7 +14,8 @@ module.exports = function(grunt) {
             sass: {
                 files: [
                     'front/src/styles/**/*.scss',
-                    '!front/src/styles/fontawesome/**'
+                    '!front/src/styles/vendor/**',
+                    'front/src/styles/vendor/_highlightjs.scss'
                 ],
                 tasks: [ 'sass' ]
             },

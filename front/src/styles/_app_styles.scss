@@ -1,1 +1,8 @@
+@import 'partials/navbar';
+@import 'partials/posts';
+@import 'partials/about';
+@import 'partials/admin';
 
+#main {
+    @include container(95%);
+}

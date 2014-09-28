@@ -12,10 +12,12 @@ define([
 
     // Views
     'views/navigation/navigationItemView',
+    'views/home/homeLayoutView',
     'views/about/aboutLayoutView',
     'views/posts/postsIndexLayoutView',
+    'views/posts/postLayoutView',
     'views/admin/adminLayoutView',
-    'views/admin/posts/newPostLayoutView'
+    'views/admin/posts/adminPostLayoutView'
 ], function(
     $,
     _,
@@ -30,10 +32,12 @@ define([
 
     // Views
     NavigationView,
+    HomeLayout,
     AboutLayoutView,
     PostsIndexLayoutView,
+    PostLayoutView,
     AdminLayoutView,
-    NewPostLayoutView
+    AdminPostLayoutView
 ) {
     "use strict";
 
@@ -54,12 +58,14 @@ define([
                 // TODO Programmatically select correct template
                 template: adminNavbarTemplate
             }));
+            this.main.show(this.options.layout || new HomeLayout());
         },
 
-        triggerLink: function(link) {
+        triggerLink: function(link, options) {
             var layout;
             switch (link) {
             case 'home':
+                layout = new HomeLayout();
                 break;
             case 'about':
                 layout = new AboutLayoutView();
@@ -67,11 +73,14 @@ define([
             case 'posts':
                 layout = new PostsIndexLayoutView();    
                 break;
+            case 'posts:view':
+                layout = new PostLayoutView(options);
+                break;
             case 'admin':
                 layout = new AdminLayoutView();
                 break;
             case 'posts:create':
-                layout = new NewPostLayoutView();
+                layout = new AdminPostLayoutView(options);
                 break;
             default:
                 break;

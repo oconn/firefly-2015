@@ -1,7 +1,8 @@
-@import 'normalize';
+@import 'vendor/normalize';
+@import 'vendor/highlightjs';
 @import 'susy';
 @import 'breakpoint';
-// @import 'fontawesome/scss/font-awesome';
+@import 'vendor/fontawesome/scss/font-awesome';
 
 @import 'globals/variables';
 @import 'globals/mixins';

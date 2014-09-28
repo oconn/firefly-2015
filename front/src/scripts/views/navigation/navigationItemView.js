@@ -14,14 +14,15 @@ define([
         "use strict";
 
         var NavigationItemView = Backbone.Marionette.ItemView.extend({
-            
+            tagName: 'nav',
+
             ui: {
                 brand: "#brand",
-                links: "#navbar li"
+                links: "ul li"
             },
 
             events: {
-                'click @ui.links': 'triggerLink'
+                'click @ui.links,@ui.brand': 'triggerLink'
             },
 
             triggerLink: function(e) {

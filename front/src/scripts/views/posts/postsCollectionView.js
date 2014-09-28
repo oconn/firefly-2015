@@ -24,27 +24,42 @@ define([
 
         ui: {
             deletePost: '.delete-post',
-            updatePost: '.update-post'
+            updatePost: '.update-post',
+            postTitle: '.post-title'
         },
 
         events: {
             'click @ui.deletePost': 'deletePost',
-            'click @ui.updatePost': 'updatePost'
+            'click @ui.updatePost': 'updatePost',
+            'click @ui.postTitle': 'goToPost'
+        },
+
+        initialize: function() {
+        
         },
 
         deletePost: function() {
-             console.log(this.model);
              this.model.destroy();
         },
 
         updatePost: function() {
-        
+             state.vent.trigger('trigger:link', 'posts:create', {model: this.model}); 
+        },
+
+        modifyKeyWords: function(html) {
+            var re = new RegExp('<span class="hljs-keyword">this</span>', 'g');
+            return html.replace(re, '<span class="hljs-keyword-this">this</span>');
+        },
+
+        goToPost: function() {
+            state.vent.trigger('trigger:link', 'posts:view', {model: this.model});
         },
 
         templateHelpers: function() {
             var h = {};
             
             h.isAdmin = state.user.admin;
+            h.description = this.modifyKeyWords(this.model.get('description'));
 
             return h;
         }
