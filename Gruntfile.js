@@ -3,8 +3,6 @@ var gruntConfig = require('./back/config/grunt_config');
 
 module.exports = function(grunt) {
     
-    var env = grunt.option('env') || 'dev';
-    
     grunt.initConfig({
         
         pkg: grunt.file.readJSON('package.json'),
@@ -51,6 +49,18 @@ module.exports = function(grunt) {
             }
         },
 
+        nodemon: {
+            dev_local: {
+                script: 'bin/www',
+                options: {
+                    env: {
+                        NODE_ENV: 'local_development'
+                    },
+                    watch: 'back'
+                }
+            } 
+        },
+
         jshint: {
             options: {
                 bitwise: false,
@@ -65,6 +75,7 @@ module.exports = function(grunt) {
                 boss: true,
                 eqnull: true,
                 browser: true,
+                expr: true,
                 es3: true,
                 globals: {
                     // for node/browser compat
@@ -72,9 +83,10 @@ module.exports = function(grunt) {
                     "module": false,
                     "Buffer": false,
                     "process": false,
+                    "Promise": true,
                     "__dirname": false,
+                    "__env": false,
                     "__base": false,
-                    'static': false,
                     // requirejs
                     "define": false,
                     "require": true,
@@ -100,12 +112,8 @@ module.exports = function(grunt) {
                 '!front/src/scripts/templates/**/*.js'
             ],
             server: [
-                'server.js',
                 'back/**/*.js',
-                'config/**/*.js',
-                'Gruntfile.js',
-                'test/spec/**/*.js',
-                'utils/**/*.js'
+                'Gruntfile.js'
             ]
         },
 
@@ -218,7 +226,8 @@ module.exports = function(grunt) {
         'contrib-jasmine',
         'contrib-concat',
         'contrib-requirejs',
-        'mocha-cli'
+        'mocha-cli',
+        'nodemon'
     ], function(task) {
         grunt.loadNpmTasks('grunt-' + task);
     });
@@ -236,6 +245,10 @@ module.exports = function(grunt) {
     grunt.registerTask('test', [
         'mochacli:back',
         'mochacli:front'
+    ]);
+
+    grunt.registerTask('start:local', [
+        'nodemon:dev_local'
     ]);
 };
 

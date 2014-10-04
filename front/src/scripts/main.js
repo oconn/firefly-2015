@@ -10,7 +10,9 @@ require.config({
         'handlebars': 'vendor/handlebars',
         'marionette.formview': 'vendor/marionette.formview',
         'chosen': 'vendor/chosen.jquery',
-        'fastclick': 'vendor/fastclick'
+        'fastclick': 'vendor/fastclick',
+        'alertjs': 'mixins/alert',
+        'promise': 'vendor/promise'
     },
     shim: {
         'jquery': {
@@ -35,6 +37,9 @@ require.config({
         },
         'chosen': {
             deps: ['jquery']
+        },
+        'alertjs': {
+            deps: ['promise']
         }
     },
     baseUrl: '/scripts/',

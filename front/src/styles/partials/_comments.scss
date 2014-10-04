@@ -1,0 +1,67 @@
+#post-comment-collection {
+    @include container(100%);
+}
+
+.base-comment {
+    margin: 1em auto 1em 1em;
+       
+    .commenter {
+        font-family: Roboto;
+        font-size: 1em;
+        line-height: 0.5;
+        margin: 1em auto 0.2em auto;
+    }
+    .comment-text {
+        font-family: Roboto;
+        font-size: 1em;
+    }
+    .add-comment-btn {
+        font-family: Roboto;
+        font-size: 1em;
+        color: $c-link;
+        transition: color 0.5s ease;
+        &:hover {
+            color: $c-link;
+            cursor: pointer;
+        }
+    }
+}
+
+.sub-comment {
+    .commenter {
+        font-size: 0.8em;
+        font-weight: lighter;
+    }
+    .comment-text {
+        font-size: 0.8em;
+        font-weight: lighter;
+    } 
+    .add-comment-btn {
+        font-size: 0.8em;
+        font-weight: lighter;
+    }
+}
+
+.depth-0 {
+    @include span(48 of 48);
+}
+.depth-1 {
+    @include span(47 of 48 last);
+    margin-left: span(1);
+}
+.depth-2 {
+    @include span(46 of 48 last);
+    margin-left: span(2);
+}
+.depth-3 {
+    @include span(45 of 48 last);
+    margin-left: span(3);
+}
+.depth-4 {
+    @include span(44 of 48 last);
+    margin-left: span(4);
+}
+.depth-5 {
+    @include span(43 of 48 last);
+    margin-left: span(5);
+}

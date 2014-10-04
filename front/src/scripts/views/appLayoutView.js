@@ -85,6 +85,9 @@ define([
             default:
                 break;
             }
+            
+            // TODO Find a better way to handle deep links
+            Backbone.history.navigate(link.split(':')[0], {trigger: false});
 
             this.main.show(layout);
         }

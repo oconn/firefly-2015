@@ -27,9 +27,9 @@ module.exports = function(options) {
     this._id = options._id || new ObjectID();
     this.title = options.title || undefined;
     this.description = options.description ? marked(options.description) : undefined;
-    this.descriptionRaw = options.description || undefined;
+    this.description_raw = options.description || undefined;
     this.body = options.body ? marked(options.body) : undefined;
-    this.bodyRaw = options.body || undefined;
-    this.createAt = options.createAt || new Date();
-    this.updatedAt = new Date();
+    this.body_raw = options.body || undefined;
+    this.create_at = options.create_at || new Date();
+    this.updated_at = new Date();
 };

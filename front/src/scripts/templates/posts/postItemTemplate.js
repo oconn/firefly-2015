@@ -14,7 +14,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (helper = helpers.body) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.body); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</p>\n\n<p class=\"back\"><i class=\"fa fa-arrow-left\"></i> Back</p>\n";
+  buffer += "</p>\n\n";
   return buffer;
   })
 

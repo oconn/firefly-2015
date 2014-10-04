@@ -5,6 +5,9 @@ define([
     'marionette',
     'marionette.formview',
     'state',
+    
+    // Mixins
+    'alertjs',
 
     // Templates
     'templates/admin/posts/postFormTemplate'
@@ -15,6 +18,9 @@ define([
     Marionette,
     FormView,
     state,
+
+    // Mixins
+    alertjs,
 
     // Templates
     template
@@ -47,16 +53,37 @@ define([
 
         onSubmit: function(e) {
             e.preventDefault();
-
+           
             var data = this.serializeFormData();
-            
-            if (!this.model.isNew()) {
-                this.model.save(data); 
-            } else {
-                state.posts.create(data, {wait: true});
-            }
 
-            state.vent.trigger('trigger:link', 'posts');
+            var alertjsOptions = this.model.isNew() ?
+                {
+                    title: 'Publish ' + data.title,
+                    yes: 'Publish',
+                    no: 'Cancel'
+                } :
+                {
+                    title: 'Update ' + data.title,
+                    yes: 'Update',
+                    no: 'Cancel'
+                };
+
+            this.createAlert(alertjsOptions).then(function() {   
+                if (!this.model.isNew()) {
+                    this.model.save(data, {
+                        success: function() {
+                            state.vent.trigger('trigger:link', 'posts');
+                        }
+                    }); 
+                } else {
+                    state.posts.create(data, {
+                        wait: true,
+                        success: function() {
+                            state.vent.trigger('trigger:link', 'posts');
+                        }
+                    });
+                }
+            }.bind(this));
         },
 
         listenForTab: function(e) {
@@ -94,6 +121,8 @@ define([
             return h;
         }
     });
+
+    _.extend(PostFormView.prototype, alertjs);
 
     return PostFormView;
 });

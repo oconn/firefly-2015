@@ -1901,6 +1901,46 @@ input.error,
 textarea.error {
   box-shadow: inset 0px 0px 4px #ff0000; }
 
+#alert-modal {
+  position: fixed;
+  width: 50%;
+  left: 25%;
+  top: 10%;
+  background-color: #FFF;
+  z-index: 101;
+  padding: 0.4em 1em; }
+  #alert-modal .alert-title {
+    text-align: center; }
+  #alert-modal #alert-yes,
+  #alert-modal #alert-no {
+    text-align: center;
+    display: inline-table;
+    width: 30%;
+    margin: 1em 6%;
+    padding: 0.5em 4%;
+    color: #FFF; }
+    #alert-modal #alert-yes:hover,
+    #alert-modal #alert-no:hover {
+      cursor: pointer; }
+  #alert-modal #alert-yes {
+    background-color: #bfbcb6; }
+    #alert-modal #alert-yes:hover {
+      background-color: rgba(191, 188, 182, 0.9); }
+  #alert-modal #alert-no {
+    background-color: #807d79; }
+    #alert-modal #alert-no:hover {
+      background-color: rgba(128, 125, 121, 0.9); }
+
+#alert-underlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.4; }
+
 #navbar {
   background-color: #fafafa;
   border-bottom: 1px solid #d1d1d1; }
@@ -1924,6 +1964,94 @@ textarea.error {
       padding: 0.5em 1em; }
       #navbar ul li:hover {
         cursor: pointer; }
+
+.post-wrapper .post-title {
+  display: inline-block; }
+  .post-wrapper .post-title:hover {
+    cursor: pointer; }
+.post-wrapper .read-more {
+  display: inline-block;
+  padding: 1em 0.4em;
+  font-size: 1em;
+  color: #3586ce;
+  transition: color 0.5s ease; }
+  .post-wrapper .read-more:hover {
+    cursor: pointer;
+    color: #3079ba; }
+
+#post-comment-collection {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto; }
+  #post-comment-collection:after {
+    content: " ";
+    display: block;
+    clear: both; }
+
+.base-comment {
+  margin: 1em auto 1em 1em; }
+  .base-comment .commenter {
+    font-family: Roboto;
+    font-size: 1em;
+    line-height: 0.5;
+    margin: 1em auto 0.2em auto; }
+  .base-comment .comment-text {
+    font-family: Roboto;
+    font-size: 1em; }
+  .base-comment .add-comment-btn {
+    font-family: Roboto;
+    font-size: 1em;
+    color: #3586ce;
+    transition: color 0.5s ease; }
+    .base-comment .add-comment-btn:hover {
+      color: #3586ce;
+      cursor: pointer; }
+
+.sub-comment .commenter {
+  font-size: 0.8em;
+  font-weight: lighter; }
+.sub-comment .comment-text {
+  font-size: 0.8em;
+  font-weight: lighter; }
+.sub-comment .add-comment-btn {
+  font-size: 0.8em;
+  font-weight: lighter; }
+
+.depth-0 {
+  width: 100%;
+  float: left;
+  margin-left: 0;
+  margin-right: 0; }
+
+.depth-1 {
+  width: 97.90795%;
+  float: right;
+  margin-right: 0;
+  margin-left: 6.77966%; }
+
+.depth-2 {
+  width: 95.8159%;
+  float: right;
+  margin-right: 0;
+  margin-left: 15.25424%; }
+
+.depth-3 {
+  width: 93.72385%;
+  float: right;
+  margin-right: 0;
+  margin-left: 23.72881%; }
+
+.depth-4 {
+  width: 91.6318%;
+  float: right;
+  margin-right: 0;
+  margin-left: 32.20339%; }
+
+.depth-5 {
+  width: 89.53975%;
+  float: right;
+  margin-right: 0;
+  margin-left: 40.67797%; }
 
 #main {
   max-width: 95%;

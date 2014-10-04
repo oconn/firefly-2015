@@ -54,8 +54,8 @@ define([
         },
 
         bootstrap: function(options) {
-            // this.listenTo(state.vent, 'show:app', this.showApp);
             // this.listenTo(state.vent, 'show:modal', this.showModal);
+            this.listenTo(state.vent, 'show:mainView', this.showMainView);
             this.router = new Router();
             this.initializeState();
 
@@ -65,7 +65,11 @@ define([
         },
 
         startApp: function() {
-            this.wrapper.show(new AppLayoutView());
+
+        },
+
+        showMainView: function(layout) {
+            this.wrapper.show(new AppLayoutView({layout: layout}));
         },
 
         initializeState: function() {

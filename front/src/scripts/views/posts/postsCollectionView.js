@@ -5,6 +5,9 @@ define([
     'marionette',
     'state',
 
+    // Mixins
+    'alertjs',
+
     // Templates
     'templates/posts/postsCollectionItemTemplate'
 ], function(
@@ -14,6 +17,9 @@ define([
     Marionette,
     state,
 
+    // Mixins
+    alertjs,
+
     // Templates
     template
 ) {
@@ -21,17 +27,19 @@ define([
 
     var PostsCollectionItemView = Backbone.Marionette.ItemView.extend({
         template: template,
+        className: 'post-wrapper',
 
         ui: {
             deletePost: '.delete-post',
             updatePost: '.update-post',
-            postTitle: '.post-title'
+            postTitle: '.post-title',
+            readMore: '.read-more'
         },
 
         events: {
             'click @ui.deletePost': 'deletePost',
             'click @ui.updatePost': 'updatePost',
-            'click @ui.postTitle': 'goToPost'
+            'click @ui.postTitle,@ui.readMore': 'goToPost'
         },
 
         initialize: function() {
@@ -39,7 +47,15 @@ define([
         },
 
         deletePost: function() {
-             this.model.destroy();
+             this.createAlert({
+                title: 'Are you sure?',
+                message: 'You are about to remove "' + this.model.get('title') + 
+                    '". This cannot be undone.',
+                yes: 'Remove Post',
+                no: 'Cancel'
+             }).then(function() {
+                this.model.destroy();
+             }.bind(this));
         },
 
         updatePost: function() {
@@ -58,12 +74,15 @@ define([
         templateHelpers: function() {
             var h = {};
             
+            h.date = new Date(this.model.get('createAt')).toLocaleDateString(); 
             h.isAdmin = state.user.admin;
             h.description = this.modifyKeyWords(this.model.get('description'));
-
+ 
             return h;
         }
     });
+
+    _.extend(PostsCollectionItemView.prototype, alertjs);
 
     var PostsCollectionView = Backbone.Marionette.CollectionView.extend({
         childView: PostsCollectionItemView

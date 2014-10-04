@@ -1,5 +1,4 @@
-var request = require('request'),
-    logger = new require('winston-logger');
+var request = require('request');
 
 // Middleware
 
@@ -12,8 +11,9 @@ function isAuthed(req, res, next) {
 
 module.exports = function(app, db, passport) {
     var staticPagesController = require('./controllers/staticPagesController'),
-        postsController = require('./controllers/postsController')(db);
-        
+        postsController = require('./controllers/postsController')(db),
+        sessionsController = require('./controllers/sessionsController')(db),
+        commentsController = require('./controllers/commentsController')(db);
     
     // *********************************** //
     // *************** API *************** //
@@ -25,14 +25,20 @@ module.exports = function(app, db, passport) {
     app.post('/api/posts', postsController.createPost);
     app.put('/api/posts/:id', postsController.updatePost);
     app.del('/api/posts/:id', postsController.deletePost);
+    
+    // ************ COMMENTS ************* //
+    app.get('/api/comments/:post_id', commentsController.getComments);
+    app.post('/api/comments/:post_id', commentsController.createComment);
 
     // *********************************** //
     // ************ ADMIN API ************ //
     // *********************************** //
    
-
+    // ************ SESSIONS ************* //
+        
+    app.post('/api/sessions/signup', sessionsController.signup);
 
     // ********* STATIC PAGES ************ //
-
+    
     app.get('*', staticPagesController.index);
 };
