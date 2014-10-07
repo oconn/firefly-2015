@@ -20,7 +20,9 @@ module.exports = function(app, db, passport) {
     // *********************************** //
    
     // ************* POSTS *************** //
+
     app.get('/api/posts', postsController.getPosts);
+    app.get('/api/posts/slug', postsController.getPostBySlug);
     app.get('/api/posts/:id', postsController.getPost);
     app.post('/api/posts', postsController.createPost);
     app.put('/api/posts/:id', postsController.updatePost);

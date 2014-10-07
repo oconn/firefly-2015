@@ -109,8 +109,8 @@ define([
 
         resetToMarkdown: function() {
             var model = this.model;
-            model.set('description', model.get('descriptionRaw'));
-            model.set('body', model.get('bodyRaw'));  
+            model.set('description', model.get('description_raw'));
+            model.set('body', model.get('body_raw'));  
         },
 
         templateHelpers: function() {

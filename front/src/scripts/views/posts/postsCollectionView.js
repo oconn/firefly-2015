@@ -74,7 +74,7 @@ define([
         templateHelpers: function() {
             var h = {};
             
-            h.date = new Date(this.model.get('createAt')).toLocaleDateString(); 
+            h.date = new Date(this.model.get('created_at')).toLocaleDateString(); 
             h.isAdmin = state.user.admin;
             h.description = this.modifyKeyWords(this.model.get('description'));
  

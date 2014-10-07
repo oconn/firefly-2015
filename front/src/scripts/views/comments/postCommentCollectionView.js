@@ -67,7 +67,6 @@ define([
 
             appendSubComment: function(subComment) {
                 this.subComments.currentView.collection.add(subComment);
-                this.subComments.currentView.render(); 
             },
 
             setDepthClass: function() {
@@ -123,8 +122,8 @@ define([
                 subComment.user = utils.safeUser();
                 state.comments.create(subComment, {
                     wait: true,
-                    success: function() {
-                        state.vent.trigger('subcomment:added:' + this.cid, subComment);
+                    success: function(savedComment) {
+                        state.vent.trigger('subcomment:added:' + this.cid, savedComment);
                     }.bind(this)
                 });
                 this.showForm();

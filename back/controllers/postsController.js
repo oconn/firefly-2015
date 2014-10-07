@@ -40,6 +40,18 @@ module.exports = function(db) {
         });
     };
 
+    c.getPostBySlug = function(req, res) {
+        postsCollection.findOne({'slug': req.query.slug}, function(err, post) {
+            if (err) {
+                res.status(400).json({error: err});
+                return;
+            }
+
+            res.json(post);
+            return;
+        });
+    };
+
     c.createPost = function(req, res) {
         var post = new Post(req.body);
         postsCollection.insert(post, function(err, write) {

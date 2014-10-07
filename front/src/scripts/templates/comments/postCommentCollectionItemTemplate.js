@@ -13,8 +13,8 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     + "</h4>\n<p class=\"comment-text\">";
   if (helper = helpers.text) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.text); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</p>\n<div class=\"sub-comment-form\"></div>\n<div class=\"sub-comments\"></div>\n";
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</p>\n<div class=\"sub-comment-form\"></div>\n<div class=\"sub-comments\"></div>\n";
   return buffer;
   })
 

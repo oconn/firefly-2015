@@ -62,7 +62,9 @@ define([
         },
 
         triggerLink: function(link, options) {
-            var layout;
+            var layout,
+                triggerNav = true;
+
             switch (link) {
             case 'home':
                 layout = new HomeLayout();
@@ -75,6 +77,8 @@ define([
                 break;
             case 'posts:view':
                 layout = new PostLayoutView(options);
+                triggerNav = false;
+                Backbone.history.navigate('posts/' + options.model.get('slug'), {trigger: false});
                 break;
             case 'admin':
                 layout = new AdminLayoutView();
@@ -86,8 +90,9 @@ define([
                 break;
             }
             
-            // TODO Find a better way to handle deep links
-            Backbone.history.navigate(link.split(':')[0], {trigger: false});
+            if (triggerNav) {
+                Backbone.history.navigate(link, {trigger: false});
+            }
 
             this.main.show(layout);
         }

@@ -4,7 +4,7 @@ var servers = config.dbServers,
     dbName = config.dbName,
     userName = config.dbUserName,
     password = config.dbPassword,
-    url; 
+    url = ''; 
 
 function buildMongoServerString() {
     servers.forEach(function(server) {

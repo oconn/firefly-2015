@@ -21,6 +21,10 @@ define([
 
     var PostItemView = Backbone.Marionette.ItemView.extend({
         template: template,
+
+        initialize: function() {
+        
+        },
        
         modifyKeyWords: function(html) {
             var re = new RegExp('<span class="hljs-keyword">this</span>', 'g');
