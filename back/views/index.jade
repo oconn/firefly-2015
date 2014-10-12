@@ -25,6 +25,13 @@ html.no-js
     //-   ga('create','UA-XXXXX-X');ga('send','pageview');
 
   body
+    if message 
+        div(id='flash-message')
+            span(class="fa-stack close-flash-message")
+                i(class="fa fa-times fa-stack-1x")
+                i(class="fa fa-circle-thin fa-stack-2x")
+                                
+            p #{message}
 
     div(id="app-wrapper")
     

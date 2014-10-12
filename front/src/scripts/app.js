@@ -13,7 +13,10 @@ define([
     'views/appLayoutView',
 
     // Collections
-    'collections/posts'
+    'collections/posts',
+
+    // Models
+    'models/user'
 ], function(
     $,
     _,
@@ -29,7 +32,10 @@ define([
     AppLayoutView,
 
     // Collections
-    PostsCollection
+    PostsCollection,
+    
+    // Models
+    UserModel
 ) {
     "use strict";
     
@@ -49,13 +55,13 @@ define([
                 wrapper: "#app-wrapper",
                 modal: '#modal'
             });
-
+            
             this.start();
         },
 
         bootstrap: function(options) {
-            // this.listenTo(state.vent, 'show:modal', this.showModal);
             this.listenTo(state.vent, 'show:mainView', this.showMainView);
+            this.flashListener();
             this.router = new Router();
             this.initializeState();
 
@@ -75,13 +81,27 @@ define([
         initializeState: function() {
             state.posts = new PostsCollection();
             state.posts.fetch(); 
+            state.user = new UserModel();
+            state.user.fetch({
+                success: function() {
+                    state.vent.trigger('update:navbar');
+                }
+            });
+        },
 
-            // TODO Create User Model/Collection
-            state.user = {
-                firstName: 'Matt',
-                lastName: 'O\'Connell',
-                admin: true
-            };
+        flashListener: function() {
+            var flashMessage = document.getElementById('flash-message');
+            if (flashMessage) {
+                var closeIcon = flashMessage.getElementsByClassName('close-flash-message')[0];
+                closeIcon.addEventListener('click', this.closeFlash);
+            }
+        },
+
+        closeFlash: function() {
+            var flashMessage = document.getElementById('flash-message'),
+                closeIcon = flashMessage.getElementsByClassName('close-flash-message')[0];
+                closeIcon.removeEventListener('click', this.closeFlash);
+            flashMessage.parentNode.removeChild(flashMessage);
         }
     });
 

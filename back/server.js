@@ -1,7 +1,6 @@
 var MongoClient = require('mongodb').MongoClient,
     passport = require('passport'),
     database = require('./config/database'),
-    routes = require('./routes'),
     Promise = require('es6-promise').Promise,
     log = require('util').log;
 
@@ -17,10 +16,7 @@ module.exports = new Promise(function(resolve, reject) {
         
         // Initialize Express 4 
         var app = require('./express')(db, passport);
-        
-        // Start Routes
-        routes(app, db, passport);
-    
+         
         log("Connected to MongoDB on port(s)\n" + database.servers);
 
         resolve(app);

@@ -1,10 +1,15 @@
-<form id="signupForm" method="POST" action="/api/session/signup">
-    
-    <label for="email">Email</label>
+<form method="POST" action="/signup">
+    <label for="signup-name">Name</label>
+    <input type="text" name="name" id="signup-name" data-field="name"></input>
+
+    <label for="signup-email">Email</label>
     <input type="text" name="email" id="signup-email" data-field="email"></input>
 
-    <label for="password">Password</label>
+    <label for="signup-password">Password</label>
     <input type="password" name="password" id="signup-password" data-field="password"></input>
 
-    <input type="submit" value="Sign Up!"></input>
+    <label for="signup-confirm">Password Confirmation</label>
+    <input type="password" name="signup-confirm" id="signup-confirm" data-field="signupConfirm"></input>
+
+    <input type="submit" value="Signup"></input>
 </form>

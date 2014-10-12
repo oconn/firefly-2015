@@ -9,6 +9,7 @@ define([
     'templates/appLayoutTemplate',
     'templates/navigation/defaultNavbarTemplate',
     'templates/navigation/adminNavbarTemplate',
+    'templates/navigation/userNavbarTemplate',
 
     // Views
     'views/navigation/navigationItemView',
@@ -17,6 +18,7 @@ define([
     'views/posts/postsIndexLayoutView',
     'views/posts/postLayoutView',
     'views/admin/adminLayoutView',
+    'views/sessions/loginLayoutView',
     'views/admin/posts/adminPostLayoutView'
 ], function(
     $,
@@ -29,6 +31,7 @@ define([
     template,
     defaultNavbarTemplate,
     adminNavbarTemplate,
+    userNavbarTemplate,
 
     // Views
     NavigationView,
@@ -37,6 +40,7 @@ define([
     PostsIndexLayoutView,
     PostLayoutView,
     AdminLayoutView,
+    LoginLayoutView,
     AdminPostLayoutView
 ) {
     "use strict";
@@ -51,14 +55,30 @@ define([
 
         initialize: function() {
             this.listenTo(state.vent, 'trigger:link', this.triggerLink);
+            this.listenTo(state.vent, 'update:navbar', this.updateNavbar);
         },
 
         onRender: function() {
-            this.navbar.show(new NavigationView({
-                // TODO Programmatically select correct template
-                template: adminNavbarTemplate
-            }));
+            this.updateNavbar();
             this.main.show(this.options.layout || new HomeLayout());
+        },
+
+        updateNavbar: function() {
+            if (state.user.get('email')) {
+                if (state.user.get('admin')) {
+                    this.navbar.show(new NavigationView({
+                        template: adminNavbarTemplate
+                    }));
+                } else {
+                    this.navbar.show(new NavigationView({
+                        template: userNavbarTemplate
+                    }));
+                }
+            } else {
+                this.navbar.show(new NavigationView({
+                    template: defaultNavbarTemplate
+                }));
+            }
         },
 
         triggerLink: function(link, options) {
@@ -82,6 +102,9 @@ define([
                 break;
             case 'admin':
                 layout = new AdminLayoutView();
+                break;
+            case 'login':
+                layout = new LoginLayoutView();
                 break;
             case 'posts:create':
                 layout = new AdminPostLayoutView(options);

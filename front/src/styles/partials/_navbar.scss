@@ -27,6 +27,10 @@
             &:hover {
                 cursor: pointer;
             }
+            a {
+                color: $c-dark-green;
+                text-decoration: none;
+            }
         } 
     }
 }

@@ -1,0 +1,23 @@
+#flash-message {
+    position: fixed;
+    width: 40%;
+    left: 35%;
+    padding: 1em auto;
+    background-color: $c-dark-green;
+    top: 10px;
+    
+    .close-flash-message {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        color: $c-off-white;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    p {
+        color: $c-off-white;
+        text-align: center; 
+    }
+}

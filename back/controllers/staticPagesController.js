@@ -1,6 +1,15 @@
 module.exports = {
     index: function(req, res) {
-        res.render('index', function(err, html) {
+      
+        var locals = {
+            message: req.flash('message')
+        };
+
+        if (locals.message.length === 0) {
+            delete locals.message;
+        }
+
+        res.render('index', locals, function(err, html) {
             if (err) {
                 res.send(500);
                 return;

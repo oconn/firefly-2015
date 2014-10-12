@@ -1941,6 +1941,24 @@ textarea.error {
   background-color: #000;
   opacity: 0.4; }
 
+#flash-message {
+  position: fixed;
+  width: 40%;
+  left: 35%;
+  padding: 1em auto;
+  background-color: #0d9673;
+  top: 10px; }
+  #flash-message .close-flash-message {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    color: #fafafa; }
+    #flash-message .close-flash-message:hover {
+      cursor: pointer; }
+  #flash-message p {
+    color: #fafafa;
+    text-align: center; }
+
 #navbar {
   background-color: #fafafa;
   border-bottom: 1px solid #d1d1d1; }
@@ -1964,6 +1982,9 @@ textarea.error {
       padding: 0.5em 1em; }
       #navbar ul li:hover {
         cursor: pointer; }
+      #navbar ul li a {
+        color: #0d9673;
+        text-decoration: none; }
 
 .post-wrapper .post-title {
   display: inline-block; }

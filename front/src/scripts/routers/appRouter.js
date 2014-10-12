@@ -37,6 +37,7 @@ define([
         
         routes: {
             '': 'home',
+            'home': 'home',
             'posts': 'posts',
             'posts/*path': 'post',
             'about': 'about',

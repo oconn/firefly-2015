@@ -1,24 +1,38 @@
 var request = require('request');
 
-// Middleware
-
-function isAuthed(req, res, next) {
-    if (req.isAuthenticated()) { 
-        return next(); 
+function isLoggedIn(req, res, next) {
+	if (!req.isAuthenticated()) {
+		return res.status(401).redirect('/');
     }
-    res.redirect('/login');
+
+    return next();
+}
+
+function isAdmin(req, res, next) {
+    if (!req.isAuthenticated() || !req.user.admin) {
+        return res.redirect('/');
+    } 
+
+    return next();
 }
 
 module.exports = function(app, db, passport) {
     var staticPagesController = require('./controllers/staticPagesController'),
         postsController = require('./controllers/postsController')(db),
-        sessionsController = require('./controllers/sessionsController')(db),
+        usersController = require('./controllers/usersController')(db),
         commentsController = require('./controllers/commentsController')(db);
+    
     
     // *********************************** //
     // *************** API *************** //
     // *********************************** //
-   
+    
+    // *********************************** //
+    // ************* USERS *************** //
+    // *********************************** //
+
+    app.get('/api/current_user', usersController.getCurrentUser);
+
     // ************* POSTS *************** //
 
     app.get('/api/posts', postsController.getPosts);
@@ -32,15 +46,28 @@ module.exports = function(app, db, passport) {
     app.get('/api/comments/:post_id', commentsController.getComments);
     app.post('/api/comments/:post_id', commentsController.createComment);
 
-    // *********************************** //
-    // ************ ADMIN API ************ //
-    // *********************************** //
    
     // ************ SESSIONS ************* //
-        
-    app.post('/api/sessions/signup', sessionsController.signup);
+    
+    app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect: '/posts',
+        failureRedirect: '/signup',
+        failureFlash: true   
+    }));    
 
+    app.post('/login', passport.authenticate('local-login', {
+        successRedirect: '/posts',
+        failureRedirect: '/login',
+        failureFlash: true
+    }));
+
+    app.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
+    });
     // ********* STATIC PAGES ************ //
     
+    app.get('/admin', isAdmin, staticPagesController.index); 
     app.get('*', staticPagesController.index);
 };
+

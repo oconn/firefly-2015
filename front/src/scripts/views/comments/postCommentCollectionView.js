@@ -79,8 +79,7 @@ define([
 
             templateHelpers: function() {
                 var h = {};
-                h.fullName = utils.fullName(this.model.get('user'));
-
+                h.name = this.model.get('name');
                 return h;
             }
         });
@@ -135,7 +134,7 @@ define([
             },
 
             clearForm: function() {
-            
+                this.ui.form.find("input[type=text], textarea").val("");
             }
         });
 

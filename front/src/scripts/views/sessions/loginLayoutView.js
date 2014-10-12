@@ -31,13 +31,7 @@ define([
             password: {
                 el: '#login-password'
             }
-        },
-        
-        onSubmit: function(e) {
-            e.preventDefault();
-
-            var data = this.serializeFormData();
-        } 
+        }
     });
 
     var LoginLayoutView = Backbone.Marionette.LayoutView.extend({

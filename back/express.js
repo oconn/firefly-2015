@@ -4,7 +4,9 @@ var express = require('express'),
     path = require('path'),
     csurf = require('csurf'),
     session = require('express-session'),
+    flash = require('connect-flash'),
     cookieParser = require('cookie-parser'),
+    routes = require('./routes'),
     MongoStore = require('connect-mongo')(session);
     
 var staticPath = __env === 'production' ? 
@@ -31,6 +33,9 @@ module.exports = function(db, passport) {
         secret: process.env.SESSION_COOKIE_SECRET || 'session secret shh...',
         saveUninitialized: true,
         resave: true,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24 * 7 // 7 Days
+        },
         store: new MongoStore({
             db: db,
             collection: 'sessions'
@@ -39,6 +44,9 @@ module.exports = function(db, passport) {
     
     app.use(passport.initialize());
     app.use(passport.session());
-    
+    app.use(flash());
+   
+    routes(app, db, passport);
+
     return app;
 };

@@ -18,7 +18,7 @@ define([
 
             ui: {
                 brand: "#brand",
-                links: "ul li"
+                links: "ul li a"
             },
 
             events: {
