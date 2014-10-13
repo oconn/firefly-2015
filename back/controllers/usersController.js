@@ -1,5 +1,6 @@
 var ObjectID = require('mongodb').ObjectID,
-    User = require('../models/user');
+    User = require('../models/user'),
+    _ = require('lodash');
 
 module.exports = function(db) {
     var c = {},
@@ -25,6 +26,21 @@ module.exports = function(db) {
 
             res.json(safeUser);
             return;
+        });
+    };
+
+    c.getUsers = function(req, res) {
+        User.find({}).toArray(function(err, users){
+            if (err) {
+                res.status(500).json({error: err});
+                return;
+            } 
+            users = _.map(users, function(user) {
+                delete user.password;
+                delete user._id;
+                return user;
+            });
+            res.json(users);
         });
     };
 

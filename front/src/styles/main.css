@@ -1909,6 +1909,10 @@ textarea.error {
   background-color: #FFF;
   z-index: 101;
   padding: 0.4em 1em; }
+  @media (min-width: 320px) and (max-width: 480px) {
+    #alert-modal {
+      width: 100%;
+      left: 0; } }
   #alert-modal .alert-title {
     text-align: center; }
   #alert-modal #alert-yes,
@@ -1923,13 +1927,13 @@ textarea.error {
     #alert-modal #alert-no:hover {
       cursor: pointer; }
   #alert-modal #alert-yes {
-    background-color: #bfbcb6; }
+    background-color: #00b23e; }
     #alert-modal #alert-yes:hover {
-      background-color: rgba(191, 188, 182, 0.9); }
+      background-color: rgba(0, 178, 62, 0.8); }
   #alert-modal #alert-no {
     background-color: #807d79; }
     #alert-modal #alert-no:hover {
-      background-color: rgba(128, 125, 121, 0.9); }
+      background-color: rgba(128, 125, 121, 0.8); }
 
 #alert-underlay {
   position: fixed;
@@ -2073,6 +2077,9 @@ textarea.error {
   float: right;
   margin-right: 0;
   margin-left: 40.67797%; }
+
+#users-list .admin {
+  color: #0d9673; }
 
 #main {
   max-width: 95%;

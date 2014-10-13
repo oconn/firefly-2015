@@ -18,8 +18,7 @@ define([
     'views/posts/postsIndexLayoutView',
     'views/posts/postLayoutView',
     'views/admin/adminLayoutView',
-    'views/sessions/loginLayoutView',
-    'views/admin/posts/adminPostLayoutView'
+    'views/sessions/loginLayoutView'
 ], function(
     $,
     _,
@@ -40,8 +39,7 @@ define([
     PostsIndexLayoutView,
     PostLayoutView,
     AdminLayoutView,
-    LoginLayoutView,
-    AdminPostLayoutView
+    LoginLayoutView
 ) {
     "use strict";
 
@@ -56,6 +54,7 @@ define([
         initialize: function() {
             this.listenTo(state.vent, 'trigger:link', this.triggerLink);
             this.listenTo(state.vent, 'update:navbar', this.updateNavbar);
+            this.listenTo(state.vent, 'trigger:unlinked', this.triggerUnlinked);
         },
 
         onRender: function() {
@@ -106,10 +105,8 @@ define([
             case 'login':
                 layout = new LoginLayoutView();
                 break;
-            case 'posts:create':
-                layout = new AdminPostLayoutView(options);
-                break;
             default:
+                layout = new HomeLayout();
                 break;
             }
             
@@ -118,6 +115,10 @@ define([
             }
 
             this.main.show(layout);
+        },
+
+        triggerUnlinked: function(layout) {
+            this.main.show(layout); 
         }
     });
 

@@ -10,7 +10,7 @@ function isLoggedIn(req, res, next) {
 
 function isAdmin(req, res, next) {
     if (!req.isAuthenticated() || !req.user.admin) {
-        return res.redirect('/');
+        return res.status(401).send();
     } 
 
     return next();
@@ -32,19 +32,20 @@ module.exports = function(app, db, passport) {
     // *********************************** //
 
     app.get('/api/current_user', usersController.getCurrentUser);
+    app.get('/api/users', isAdmin, usersController.getUsers);
 
     // ************* POSTS *************** //
 
     app.get('/api/posts', postsController.getPosts);
     app.get('/api/posts/slug', postsController.getPostBySlug);
     app.get('/api/posts/:id', postsController.getPost);
-    app.post('/api/posts', postsController.createPost);
-    app.put('/api/posts/:id', postsController.updatePost);
-    app.del('/api/posts/:id', postsController.deletePost);
+    app.post('/api/posts', isAdmin, postsController.createPost);
+    app.put('/api/posts/:id', isAdmin, postsController.updatePost);
+    app.del('/api/posts/:id', isAdmin, postsController.deletePost);
     
     // ************ COMMENTS ************* //
     app.get('/api/comments/:post_id', commentsController.getComments);
-    app.post('/api/comments/:post_id', commentsController.createComment);
+    app.post('/api/comments/:post_id', isLoggedIn, commentsController.createComment);
 
    
     // ************ SESSIONS ************* //

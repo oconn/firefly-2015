@@ -6,7 +6,11 @@ define([
         'state',
 
         // Templates
-        'templates/admin/adminLayoutTemplate'
+        'templates/admin/adminLayoutTemplate',
+
+        // Views
+        'views/admin/posts/adminPostLayoutView',
+        'views/admin/users/adminUsersLayoutView'
 ], function(
         $,
         _,
@@ -15,7 +19,11 @@ define([
         state,
 
         // Templates
-        template
+        template,
+
+        // Views
+        AdminPostLayoutView,
+        AdminUserLayoutView
 ) {
         "use strict";
 
@@ -23,15 +31,21 @@ define([
             template: template,
 
             ui: {
-                createPost: '#create-post'
+                createPost: '#create-post',
+                manageUsers: '#manage-users'
             },
 
             events: {
-                'click @ui.createPost': 'createPost'
+                'click @ui.createPost': 'createPost',
+                'click @ui.manageUsers': 'manageUsers'
             },
 
             createPost: function() {
-                state.vent.trigger('trigger:link', 'posts:create');
+                state.vent.trigger('trigger:unlinked', new AdminPostLayoutView());
+            },
+
+            manageUsers: function() {
+                state.vent.trigger('trigger:unlinked', new AdminUserLayoutView());
             }
         });
 

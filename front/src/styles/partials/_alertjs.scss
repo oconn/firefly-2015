@@ -7,6 +7,11 @@
     z-index: 101;
     padding: 0.4em 1em;
 
+    @include breakpoint($phone) {
+        width: 100%;
+        left: 0;
+    }
+
     .alert-title {
         text-align: center;
     }
@@ -25,18 +30,18 @@
     }
 
     #alert-yes {
-        background-color: rgb(191, 188, 182);
+        background-color: rgb(0, 178, 62);
         &:hover {
-            background-color: rgba(191, 188, 182, 0.9);
-        } 
+            background-color: rgba(0, 178, 62, 0.8);
+        }
     }
 
     #alert-no {
         background-color: rgb(128, 125, 121);
         &:hover {
-            background-color: rgba(128, 125, 121, 0.9);
-        }    
-    }  
+            background-color: rgba(128, 125, 121, 0.8);
+        }
+    }
 }
 
 #alert-underlay {

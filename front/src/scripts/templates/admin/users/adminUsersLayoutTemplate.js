@@ -6,7 +6,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<h1>Admin</h1>\n\n<button id=\"create-post\">New Post</button>\n<button id=\"manage-users\">Manage Users</button> \n";
+  return "<h1>Manage Users</h1>\n\n<div id=\"users-list\"></div>\n";
   })
 
 });

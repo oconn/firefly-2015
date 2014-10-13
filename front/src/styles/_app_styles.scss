@@ -5,6 +5,7 @@
 @import 'partials/comments';
 @import 'partials/about';
 @import 'partials/admin';
+@import 'partials/admin_users';
 
 #main {
     @include container(95%);
