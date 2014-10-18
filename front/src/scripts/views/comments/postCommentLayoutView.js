@@ -1,54 +1,68 @@
 define([
-        'jquery',
-        'underscore',
-        'backbone',
-        'marionette',
-        'state',
+    'jquery',
+    'underscore',
+    'backbone',
+    'marionette',
+    'state',
 
-        // Templates
-        'templates/comments/postCommentLayoutTemplate',
+    // Templates
+    'templates/comments/postCommentLayoutTemplate',
 
-        // Views
-        'views/comments/postCommentCollectionView',
-        'views/comments/postCommentFormView'
+    // Views
+    'views/comments/postCommentCollectionView',
+    'views/comments/postCommentFormView',
+    'views/comments/postCommentSignInUpLayoutView'
 ], function(
-        $,
-        _,
-        Backbone,
-        Marionette,
-        state,
+    $,
+    _,
+    Backbone,
+    Marionette,
+    state,
 
-        // Templates
-        template,
+    // Templates
+    template,
 
-        // Views
-        PostCommentCollectionView,
-        PostCommentFormView
+    // Views
+    PostCommentCollectionView,
+    PostCommentFormView,
+    PostCommentSignInUpLayoutView
 ) {
-        "use strict";
+    "use strict";
 
-        var PostCommentLayoutView = Backbone.Marionette.LayoutView.extend({
-            template: template,
-     
-            regions: {
-                postComments: '#post-comment-collection',
-                commentForm: '#comment-form' 
-            },
+    var PostCommentLayoutView = Backbone.Marionette.LayoutView.extend({
+        template: template,
+ 
+        regions: {
+            postComments: '#post-comment-collection',
+            commentForm: '#comment-form' 
+        },
 
-            onRender: function() {
-                this.postComments.show(new PostCommentCollectionView(this.postId));
-                this.listenTo(state.vent, 'comments:fetched', this.displayCommentForm);
-                
-            },
+        onRender: function() {
+            this.postComments.show(new PostCommentCollectionView(this.postId));
+            this.listenTo(state.vent, 'comments:fetched', this.displayCommentForm);
+            
+        },
 
-            initialize: function() {
-                this.postId = {postId: this.model.get('_id')};       
-            },
+        initialize: function() {
+            this.postId = {postId: this.model.get('_id')};       
+        },
+        
+        /**
+         * Will display base comment form or a not
+         * signed in view
+         *
+         * @method displayCommentForm
+         */
 
-            displayCommentForm: function() {
+        displayCommentForm: function() {
+            
+            if (state.user.get('email')) {
                 this.commentForm.show(new PostCommentFormView(this.postId));
+            } else {
+                this.commentForm.show(new PostCommentSignInUpLayoutView()); 
             }
-        });
+        }
+    });
 
-        return PostCommentLayoutView;
+    return PostCommentLayoutView;
 });

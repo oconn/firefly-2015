@@ -44,7 +44,9 @@ define([
                 this.setDepthClass();
                 if (this.depth < 4) {
                     this.renderSubComments();
-                    this.renderSubCommentForm();
+                    if(state.user.get('email')) {
+                        this.renderSubCommentForm();
+                    }
                 }
             },
 
