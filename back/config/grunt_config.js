@@ -57,6 +57,10 @@ options.buildFiles = [
         dest: 'front/src/scripts/vendor/fastclick.js'
     },
     {
+        src: 'packages/blueimp-file-upload/js/jquery.fileupload.js',
+        dest: 'front/src/scripts/vendor/jquery-image-uploader.js'
+    },
+    {
         src: 'node_modules/es6-promise/dist/es6-promise.js',
         dest: 'front/src/scripts/vendor/promise.js'
     }

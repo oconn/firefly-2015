@@ -10,7 +10,8 @@ define([
 
         // Views
         'views/admin/posts/adminPostLayoutView',
-        'views/admin/users/adminUsersLayoutView'
+        'views/admin/users/adminUsersLayoutView',
+        'views/admin/portfolios/adminPortfolioLayoutView'
 ], function(
         $,
         _,
@@ -23,7 +24,8 @@ define([
 
         // Views
         AdminPostLayoutView,
-        AdminUserLayoutView
+        AdminUserLayoutView,
+        AdminPortfolioLayoutView
 ) {
         "use strict";
 
@@ -32,12 +34,14 @@ define([
 
             ui: {
                 createPost: '#create-post',
-                manageUsers: '#manage-users'
+                manageUsers: '#manage-users',
+                managePortfolios: '#manage-portfolios'        
             },
 
             events: {
                 'click @ui.createPost': 'createPost',
-                'click @ui.manageUsers': 'manageUsers'
+                'click @ui.manageUsers': 'manageUsers',
+                'click @ui.managePortfolios': 'managePortfolios'        
             },
 
             createPost: function() {
@@ -46,6 +50,10 @@ define([
 
             manageUsers: function() {
                 state.vent.trigger('trigger:unlinked', new AdminUserLayoutView());
+            },
+
+            managePortfolios: function() {
+                state.vent.trigger('trigger:unlinked', new AdminPortfolioLayoutView()); 
             }
         });
 

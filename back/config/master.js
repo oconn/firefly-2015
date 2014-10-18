@@ -1,4 +1,4 @@
-var dbName = 'mjodev';
+var dbName = 'firefly2015';
 
 var mongodbServers = [
     // {

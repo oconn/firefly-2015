@@ -12,7 +12,8 @@ require.config({
         'chosen': 'vendor/chosen.jquery',
         'fastclick': 'vendor/fastclick',
         'alertjs': 'mixins/alert',
-        'promise': 'vendor/promise'
+        'promise': 'vendor/promise',
+        'uploader': 'vendor/jquery-image-uploader'        
     },
     shim: {
         'jquery': {
@@ -40,7 +41,10 @@ require.config({
         },
         'alertjs': {
             deps: ['promise']
-        }
+        },
+        'uploader': {
+            deps: ['jquery']
+        }        
     },
     baseUrl: '/scripts/',
     name: "main",

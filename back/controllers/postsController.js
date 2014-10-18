@@ -56,7 +56,7 @@ module.exports = function(db) {
         var post = new Post(req.body);
         postsCollection.insert(post, function(err, write) {
             if (err) {
-                res.status(400).json({error: err});
+                res.status(500).json({error: err});
                 return;
             } 
 

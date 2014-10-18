@@ -1,5 +1,4 @@
 var ObjectID = require('mongodb').ObjectID,
-    User = require('../models/user'),
     _ = require('lodash');
 
 module.exports = function(db) {

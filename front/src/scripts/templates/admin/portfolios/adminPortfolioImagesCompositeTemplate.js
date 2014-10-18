@@ -6,7 +6,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<h1>Admin</h1>\n\n<button id=\"create-post\">New Post</button>\n<button id=\"manage-users\">Manage Users</button>\n<button id=\"manage-portfolios\">Manage Portfolios</button>\n";
+  return "<button class=\"add-portfolio-images\">Add Images</button>\n\n<form class=\"portfolio-images-form hidden\" method=\"\" action=\"\">\n    <h1>hidden form</h1>\n</form>\n\n<div class=\"portfolio-images-collection\"></div>\n";
   })
 
 });

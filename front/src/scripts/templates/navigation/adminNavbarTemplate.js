@@ -6,7 +6,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<h1 id=\"brand\" data-link=\"home\">MJODEV</h1>\n\n<ul>\n    <li data-link=\"admin\"><a data-link=\"admin\">Admin</a></li>\n    <li data-link=\"about\"><a data-link=\"about\">About</a></li>\n    <li data-link=\"posts\"><a data-link=\"posts\">Posts</a></li>\n    <li><a href=\"logout\">Logout</a></li>\n</ul>\n";
+  return "<h1 id=\"brand\" data-link=\"home\">Firefly Photography</h1>\n\n<ul>\n    <li><a data-link=\"admin\">Admin</a></li>\n    <li><a data-link=\"about\">About</a></li>\n    <li><a data-link=\"gallery\">Gallery</a></li>\n    <li><a data-link=\"posts\">Posts</a></li>\n    <li><a href=\"logout\">Logout</a></li>\n</ul>\n";
   })
 
 });

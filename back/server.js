@@ -16,8 +16,7 @@ module.exports = new Promise(function(resolve, reject) {
         
         // Initialize Express 4 
         var app = require('./express')(db, passport);
-         
-        log("Connected to MongoDB on port(s)\n" + database.servers);
+        log("Connected to Mongo Database: '" + database.name + "' on port(s)\n" + database.servers);
 
         resolve(app);
         return;

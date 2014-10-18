@@ -20,8 +20,8 @@ module.exports = function(app, db, passport) {
     var staticPagesController = require('./controllers/staticPagesController'),
         postsController = require('./controllers/postsController')(db),
         usersController = require('./controllers/usersController')(db),
+        portfoliosController = require('./controllers/portfoliosController')(db),        
         commentsController = require('./controllers/commentsController')(db);
-    
     
     // *********************************** //
     // *************** API *************** //
@@ -34,6 +34,10 @@ module.exports = function(app, db, passport) {
     app.get('/api/current_user', usersController.getCurrentUser);
     app.get('/api/users', isAdmin, usersController.getUsers);
 
+    // *********** PORTFOLIOS ************ //
+
+    app.get('/api/portfolios', portfoliosController.getPortfolios);
+    app.post('/api/portfolios', isAdmin, portfoliosController.addPortfolio);
     // ************* POSTS *************** //
 
     app.get('/api/posts', postsController.getPosts);

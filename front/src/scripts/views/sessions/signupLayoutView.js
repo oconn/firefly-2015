@@ -7,7 +7,8 @@ define([
     'utils',
 
     // Templates
-    'templates/sessions/signupLayoutTemplate'
+    'templates/sessions/signupLayoutTemplate',
+    'templates/sessions/signupFormTemplate'
 ], function(    
     $,
     _,
@@ -17,12 +18,13 @@ define([
     utils,
 
     // Templates
-    template
+    template,
+    signupFormTemplate
 ) {
     "use strict";
     
     var SignupFormView = Backbone.Marionette.FormView.extend({
-        template: template,
+        template: signupFormTemplate,
 
         fields: {
             name: {

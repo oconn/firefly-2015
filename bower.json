@@ -1,5 +1,5 @@
 {
-    "name": "mjodev",
+    "name": "firefly2015",
     "version": "0.0.1",
     "dependencies": {
         "requirejs": "~2.1.4",
@@ -12,6 +12,7 @@
         "fastclick": "~1.0.3",
         "marionette.formview": "willowtreeapps/marionette.formview",
         "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.1.0/chosen_v1.1.0.zip",
-        "es6-promise-polyfill": "~1.0.0"
+        "es6-promise-polyfill": "~1.0.0",
+        "blueimp-file-upload": "~9.8.0"
      }
 }

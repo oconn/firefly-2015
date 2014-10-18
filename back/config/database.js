@@ -48,5 +48,6 @@ case 'production':
 
 module.exports = {
     url: url,
-    servers: servers
+    servers: servers,
+    name: dbName
 };
