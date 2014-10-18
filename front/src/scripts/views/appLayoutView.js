@@ -94,7 +94,7 @@ define([
             case 'posts':
                 layout = new PostsIndexLayoutView();    
                 break;
-            case 'posts:view':
+            case 'postsView':
                 layout = new PostLayoutView(options);
                 triggerNav = false;
                 Backbone.history.navigate('posts/' + options.model.get('slug'), {trigger: false});

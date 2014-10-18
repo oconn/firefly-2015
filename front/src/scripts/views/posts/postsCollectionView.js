@@ -9,7 +9,10 @@ define([
     'alertjs',
 
     // Templates
-    'templates/posts/postsCollectionItemTemplate'
+    'templates/posts/postsCollectionItemTemplate',
+
+    // Views
+    'views/admin/posts/adminPostLayoutView'
 ], function(
     $,
     _,
@@ -21,7 +24,10 @@ define([
     alertjs,
 
     // Templates
-    template
+    template,
+
+    // Views
+    AdminPostLayoutView
 ) {
     "use strict";
 
@@ -59,7 +65,7 @@ define([
         },
 
         updatePost: function() {
-             state.vent.trigger('trigger:link', 'posts:create', {model: this.model}); 
+             state.vent.trigger('trigger:unlinked', new AdminPostLayoutView({model: this.model}));
         },
 
         modifyKeyWords: function(html) {
@@ -68,7 +74,7 @@ define([
         },
 
         goToPost: function() {
-            state.vent.trigger('trigger:link', 'posts:view', {model: this.model});
+            state.vent.trigger('trigger:link', 'postsView', {model: this.model});
         },
 
         templateHelpers: function() {

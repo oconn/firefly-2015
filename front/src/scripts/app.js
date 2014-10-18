@@ -5,6 +5,7 @@ define([
     'marionette',
     'state',
     'fastclick',
+    'promise',
     
     // Routers
     'routers/appRouter',
@@ -24,6 +25,7 @@ define([
     Marionette,
     state,
     FastClick,
+    Promise,
 
     // Routers
     Router,
@@ -38,55 +40,48 @@ define([
     UserModel
 ) {
     "use strict";
-    
+    Promise = Promise.Promise;
+
     var App = Backbone.Marionette.Application.extend({
 
         initialize: function() {
             FastClick.attach(document.body);
-            this.on("before:start", function(options){
-                this.bootstrap(options);
-            }.bind(this));
-
-            this.on("start", function(options){
-                this.startApp(options);
-            }.bind(this));
+            this.bootstrap();
 
             this.addRegions({
-                wrapper: "#app-wrapper",
-                modal: '#modal'
+                wrapper: "#app-wrapper"
             });
-            
-            this.start();
         },
 
         bootstrap: function(options) {
-            this.listenTo(state.vent, 'show:mainView', this.showMainView);
-            this.flashListener();
-            this.router = new Router();
-            this.initializeState();
+            var promise = this.initializeState();
 
-            if (Backbone.history) {
-                Backbone.history.start({pushState: true, root: '/'});
-            }
-        },
-
-        startApp: function() {
-
+            promise.then(function() {
+                this.listenTo(state.vent, 'show:mainView', this.showMainView);
+                this.flashListener();
+                this.router = new Router();
+            
+                if (Backbone.history) {
+                    Backbone.history.start({pushState: true, root: '/'});
+                }
+            }.bind(this));
         },
 
         showMainView: function(layout) {
-            this.wrapper.show(new AppLayoutView({layout: layout}));
+           this.wrapper.show(new AppLayoutView({layout: layout}));
         },
 
         initializeState: function() {
-            state.posts = new PostsCollection();
-            state.posts.fetch(); 
-            state.user = new UserModel();
-            state.user.fetch({
-                success: function() {
-                    state.vent.trigger('update:navbar');
-                }
-            });
+            return new Promise(function(resolve, reject) {
+                state.posts = new PostsCollection();
+                state.posts.fetch(); 
+                state.user = new UserModel();
+                state.user.fetch({
+                    success: function() {
+                        resolve();
+                    }
+                });
+            });    
         },
 
         flashListener: function() {

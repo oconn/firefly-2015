@@ -57,7 +57,7 @@ options.buildFiles = [
         dest: 'front/src/scripts/vendor/fastclick.js'
     },
     {
-        src: 'packages/es6-promise-polyfill/promise.js',
+        src: 'node_modules/es6-promise/dist/es6-promise.js',
         dest: 'front/src/scripts/vendor/promise.js'
     }
 ];
