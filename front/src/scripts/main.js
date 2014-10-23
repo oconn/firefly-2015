@@ -13,7 +13,9 @@ require.config({
         'fastclick': 'vendor/fastclick',
         'alertjs': 'mixins/alert',
         'promise': 'vendor/promise',
-        'uploader': 'vendor/jquery-image-uploader'        
+        'uploader': 'vendor/jquery-image-uploader',
+        'jquery.ui.widget': 'vendor/jquery.ui.widget',
+        'jquery.iframe-transport': 'vendor/jquery.iframe-transport'        
     },
     shim: {
         'jquery': {

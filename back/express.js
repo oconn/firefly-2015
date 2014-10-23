@@ -8,7 +8,7 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     routes = require('./routes'),
     MongoStore = require('connect-mongo')(session);
-    
+
 var staticPath = __env === 'production' ? 
         __base + '/front/public' : 
         __base + '/front/src';

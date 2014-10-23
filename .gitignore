@@ -1,5 +1,7 @@
 packages
 node_modules
+tmp
+images
 
 frontend/public/packages
 .DS_Store

@@ -20,7 +20,6 @@ marked.setOptions({
     }
 });
 
-
 module.exports = function(options) {
     options = options || {};
     options._id = options._id ? new ObjectID(options._id) : undefined;

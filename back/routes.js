@@ -1,4 +1,5 @@
-var request = require('request');
+var request = require('request'),
+    formidable = require('formidable');
 
 function isLoggedIn(req, res, next) {
 	if (!req.isAuthenticated()) {
@@ -20,6 +21,7 @@ module.exports = function(app, db, passport) {
     var staticPagesController = require('./controllers/staticPagesController'),
         postsController = require('./controllers/postsController')(db),
         usersController = require('./controllers/usersController')(db),
+        portfolioImagesController = require('./controllers/portfolioImagesController')(db),
         portfoliosController = require('./controllers/portfoliosController')(db),        
         commentsController = require('./controllers/commentsController')(db);
     
@@ -38,6 +40,10 @@ module.exports = function(app, db, passport) {
 
     app.get('/api/portfolios', portfoliosController.getPortfolios);
     app.post('/api/portfolios', isAdmin, portfoliosController.addPortfolio);
+
+    // ************ IMAGES *************** //
+    app.post('/api/images', isAdmin, portfolioImagesController.addImage);
+
     // ************* POSTS *************** //
 
     app.get('/api/posts', postsController.getPosts);

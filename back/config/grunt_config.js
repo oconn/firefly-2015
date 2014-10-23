@@ -61,6 +61,14 @@ options.buildFiles = [
         dest: 'front/src/scripts/vendor/jquery-image-uploader.js'
     },
     {
+        src: 'packages/blueimp-file-upload/js/vendor/jquery.ui.widget.js',
+        dest: 'front/src/scripts/vendor/jquery.ui.widget.js'
+    },
+    {
+        src: 'packages/blueimp-file-upload/js/jquery.iframe-transport.js',
+        dest: 'front/src/scripts/vendor/jquery.iframe-transport.js'    
+    },    
+    {
         src: 'node_modules/es6-promise/dist/es6-promise.js',
         dest: 'front/src/scripts/vendor/promise.js'
     }

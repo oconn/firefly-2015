@@ -53,7 +53,8 @@ define([
                     this.portfolioImages.empty();    
                 } else {
                     this.portfolioImages.show(new AdminPortfolioImagesLayoutView({
-                        collection: new ImageCollection(this.model.images)
+                        collection: new ImageCollection(this.model.images),
+                        portfolio: this.model.get('_id')  
                     }));   
                 }   
             }        
