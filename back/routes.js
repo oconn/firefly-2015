@@ -41,8 +41,9 @@ module.exports = function(app, db, passport) {
     app.get('/api/portfolios', portfoliosController.getPortfolios);
     app.post('/api/portfolios', isAdmin, portfoliosController.addPortfolio);
 
-    // ************ IMAGES *************** //
-    app.post('/api/images', isAdmin, portfolioImagesController.addImage);
+    // ******* PORTFOLIO IMAGES ********** //
+    app.get('/api/portfolios/images', portfolioImagesController.getImages);
+    app.post('/api/portfolios/images', isAdmin, portfolioImagesController.addImages);
 
     // ************* POSTS *************** //
 

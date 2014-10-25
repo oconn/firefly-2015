@@ -3,7 +3,7 @@ node_modules
 tmp
 images
 
-frontend/public/packages
+front/src/scripts/vendor
 .DS_Store
 .sass-cache
 Gemfile.lock

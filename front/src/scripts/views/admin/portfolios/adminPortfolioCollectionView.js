@@ -10,7 +10,6 @@ define([
 
         // Collections
         'collections/portfolios',
-        'collections/images',
 
         // Views
         'views/admin/portfolios/adminPortfolioImagesLayoutView'
@@ -26,7 +25,6 @@ define([
 
         // Collections
         PortfolioCollection,
-        ImageCollection,
 
         // Views
         AdminPortfolioImagesLayoutView
@@ -35,6 +33,10 @@ define([
         
         var AdminPortfolioCollectionChildView = Backbone.Marionette.LayoutView.extend({
             template: template,
+
+            initialize: function() {
+            
+            },
                 
             regions: {
                 portfolioImages: '.portfolio-images'    
@@ -53,8 +55,7 @@ define([
                     this.portfolioImages.empty();    
                 } else {
                     this.portfolioImages.show(new AdminPortfolioImagesLayoutView({
-                        collection: new ImageCollection(this.model.images),
-                        portfolio: this.model.get('_id')  
+                        portfolio: this.model 
                     }));   
                 }   
             }        

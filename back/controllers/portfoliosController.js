@@ -5,7 +5,7 @@ var ObjectID = require('mongodb').ObjectID,
 module.exports = function(db) {
     var c = {},
         Portfolio = db.collection('portfolios');
-    
+
     Portfolio.ensureIndex(
         {name: 1},
         {
@@ -23,7 +23,7 @@ module.exports = function(db) {
                 res.status(500).json({error: err});
                 return;
             }
-
+            
             res.json(portfolios);
             return;
         });

@@ -22,11 +22,17 @@ define([
     "use strict";
     
     var AdminPortfolioImagesCollectionChildView = Backbone.Marionette.LayoutView.extend({
-        template: template
+        template: template,
+
+        initialize: function() {
+        }
     });
 
     var AdminPortfolioImagesCollectionView = Backbone.Marionette.CollectionView.extend({
-        childView: AdminPortfolioImagesCollectionChildView
+        childView: AdminPortfolioImagesCollectionChildView,
+
+        initialize: function() {
+        }
     });
 
     var AdminPortfolioImagesLayoutView = Backbone.Marionette.LayoutView.extend({
@@ -42,30 +48,31 @@ define([
             portfolioImages: '.portfolio-images-collection'  
         },
 
-        initialize: function() {
-        
+        initialize: function(options) {
+            options = options || {};
+            this.portfolio = options.portfolio;
         },        
 
         onRender: function() {
-            this.portfolioImages.show(new AdminPortfolioImagesCollectionView({
-                collection: this.collection
-            }));
+            this.portfolioImages.show(new AdminPortfolioImagesCollectionView({}));
 
             this.addFileUploadScript();
         },
 
         addFileUploadScript: function() {
+            this.ui.uploadingFiles.html('');    
             this.$el.find(this.ui.uploader).fileupload({
                 dataType: 'json',
                 formData: {
-                    portfolioId: this.options.portfolio   
+                    portfolioId: this.portfolio.get('_id')
                 },    
                 done: function(e, data) {
-                    this.ui.uploadingFiles.html('');    
-                    _.each(data.result.files, function(file) {
-                         this.ui.uploadingFiles.append('<p>' + file.name + '</p>');
-                    });
-                }.bind(this) 
+                
+                }.bind(this),
+                fail: function(e, data) {
+                    var error = data.response().jqXHR.responseJSON.error;
+                    this.ui.uploadingFiles.append('<p>' + error + '</p>');
+                }.bind(this)
             });
         },        
 

@@ -47,11 +47,10 @@ function uploadToS3(files, id,  cb) {
                 if (err) {
                     completed.push('fail');    
                 } else {
-                    console.log(result);
                     completed.push('success');
                 }
                 if(completed.length === files.length) {
-                    cb();
+                    cb(completed);
                 }
             });
         }); 
@@ -84,7 +83,7 @@ module.exports = function(db) {
     var c = {},
         imageCollection = db.collection('portfolio_images');
     
-    c.addImage = function(req, res) {
+    c.addImages = function(req, res) {
         parseForm(req, function(err, fields, files) {
             if (err) {
                 res.status(500).json({error: err});
@@ -93,11 +92,12 @@ module.exports = function(db) {
             _.each(files, function(file) {
                 if (!supportedType(file.type)) { 
                     removeFile(file.path);
+                    res.status(400).json({error: 'File type not supported'});
                     return; 
                 }
                 
                 var image = new ImageModel({
-                    portfolio_id: fields.portfolioId,
+                    portfolio_id: new ObjectID(fields.portfolioId),
                     name: file.name 
                 }); 
 
@@ -109,15 +109,20 @@ module.exports = function(db) {
                     }   
 
                     var images = createImages(file);
-                    uploadToS3(images, image.portfolio_id, function() {
+                    uploadToS3(images, image.portfolio_id, function(results) {
                         _.each(images, function(i) {
                             removeFile(i);
                         });
                         removeFile(file.path);
+                        res.json(results);
                     });
                 });
             });    
         }); 
+    };
+
+    c.getImages = function(req, res) {
+    
     };
 
     return c;
