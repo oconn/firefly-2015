@@ -27,6 +27,7 @@
         "bcrypt": "*",
         "passport-google-oauth": "~0.1.5",
         "passport-local": "~1.0.0",
+        "passport.socketio": "~3.4.1",
         "marked": "~0.3.2",
         "highlight.js": "~8.2.0",
         "formidable": "~1.0.15",

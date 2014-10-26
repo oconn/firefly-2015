@@ -2078,6 +2078,11 @@ textarea.error {
   margin-right: 0;
   margin-left: 40.67797%; }
 
+.admin-portfolio .uploading-files .invalid {
+  color: red; }
+.admin-portfolio .uploading-files .valid {
+  color: green; }
+
 #users-list .admin {
   color: #0d9673; }
 

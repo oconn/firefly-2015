@@ -45,6 +45,7 @@ define([
     var App = Backbone.Marionette.Application.extend({
 
         initialize: function() {
+            window.socketPath = 'http://localhost:8080';
             FastClick.attach(document.body);
             this.bootstrap();
 

@@ -15,7 +15,8 @@ require.config({
         'promise': 'vendor/promise',
         'uploader': 'vendor/jquery-image-uploader',
         'jquery.ui.widget': 'vendor/jquery.ui.widget',
-        'jquery.iframe-transport': 'vendor/jquery.iframe-transport'        
+        'jquery.iframe-transport': 'vendor/jquery.iframe-transport',
+        'socketio': 'https://cdn.socket.io/socket.io-1.0.0'
     },
     shim: {
         'jquery': {
@@ -44,9 +45,9 @@ require.config({
         'alertjs': {
             deps: ['promise']
         },
-        'uploader': {
-            deps: ['jquery']
-        }        
+        'socketio': {
+            exports: 'io'
+        }      
     },
     baseUrl: '/scripts/',
     name: "main",

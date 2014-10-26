@@ -6,7 +6,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<button class=\"add-portfolio-images\">Add Images</button>\n\n<form class=\"portfolio-images-form hidden\" method=\"\" action=\"\">\n    <input type=\"file\" name=\"files[]\" class=\"fileupload\" data-url=\"/api/portfolios/images\" multiple></input>\n    <div class=\"uploading-files\"></div>\n</form>\n\n<div class=\"portfolio-images-collection\"></div>\n";
+  return "<form class=\"portfolio-images-form\" method=\"\" action=\"\">\n    <input type=\"file\" name=\"files[]\" class=\"fileupload\" multiple></input>\n    <div class=\"uploading-files\"></div>\n</form>\n\n<div class=\"portfolio-images-collection\"></div>\n";
   })
 
 });

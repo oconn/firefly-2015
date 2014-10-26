@@ -1,5 +1,4 @@
-var request = require('request'),
-    formidable = require('formidable');
+var request = require('request');
 
 function isLoggedIn(req, res, next) {
 	if (!req.isAuthenticated()) {
@@ -17,7 +16,7 @@ function isAdmin(req, res, next) {
     return next();
 }
 
-module.exports = function(app, db, passport) {
+module.exports = function(app, db,  passport) {
     var staticPagesController = require('./controllers/staticPagesController'),
         postsController = require('./controllers/postsController')(db),
         usersController = require('./controllers/usersController')(db),
@@ -82,4 +81,3 @@ module.exports = function(app, db, passport) {
     app.get('/admin', isAdmin, staticPagesController.index); 
     app.get('*', staticPagesController.index);
 };
-
