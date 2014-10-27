@@ -61,7 +61,6 @@ define([
         sendFile: function(file, index) {
             var socket = io.connect(window.socketPath);
             socket.emit('headers', {
-                name: file.name,
                 type: file.type,
                 size: file.size
             });
@@ -69,12 +68,20 @@ define([
                 console.log(data);
             });
             socket.on('send-buffer', function(data) {
-                socket.emit('process-buffer', file.arraybuffer);
+                socket.emit('process-buffer', {
+                    buffer: file.arraybuffer,
+                    name: file.name,
+                    portfolio: this.portfolio.get('_id')
+                });
+            }.bind(this));
+            socket.on('upload-progress', function(data) {
+                console.log(data);
             });
         },
 
         onSubmit: function(e) {
             e.preventDefault();
+            this.ui.imagesForm.find('.submit-btn').addClass('hidden');
 
             _.each(this.files, function(file, index) {
                 if (file.arraybuffer) {
@@ -100,7 +107,7 @@ define([
                     this.ui.uploadingFiles.append(html);
                 }.bind(this));
             }.bind(this));
-            this.ui.imagesForm.append('<input type="submit" value="upload"></input>');
+            this.ui.imagesForm.append('<input class="submit-btn" type="submit" value="upload"></input>');
             this.ui.uploader.addClass('hidden');
         }, 
         
