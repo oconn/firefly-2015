@@ -8,7 +8,7 @@ global.__env = process.env.NODE_ENV || 'development';
 var promise = require('../back/server');
 
 promise.then(function(app) {
-    app.set('port', process.env.NODE_PORT || 8000);
+    app.set('port', process.env.NODE_PORT || 7000);
     var server = app.listen(app.get('port'), function() {
       log('Server listening on port ' + server.address().port);
       log('NODE_ENV = ' + __env);
